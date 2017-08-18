@@ -1,0 +1,50 @@
+<html>
+
+<body>
+
+    <link href="../static/Dependencies/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/Dependencies/morrisjs/morris.css" rel="stylesheet">
+    <link href="../static/Dependencies/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../static/dial/styles.css" />
+    <link rel="stylesheet" href="../static/dial/knobKnob.css" />
+	</head>
+<div class="list-group" id = "alerts_readings">
+
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-bolt fa-fw"></i> Room temperature
+                                    <span class="pull-right text-muted small" id = "room temperature"><em>{{room_temperature}}</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-bolt fa-fw"></i> room humidity
+                                    <span class="pull-right text-muted small" id = "ac temperature"><em>{{room_humidity}}</em>
+                                    </span>
+                                </a>
+								<a href="#" class="list-group-item">
+                                    <i class="fa fa-bolt fa-fw"></i> Predicted Temperature
+                                    <span class="pull-right text-muted small" id = "predicted temperature"><em>22</em>
+                                    </span>
+                                </a>
+ </div>
+  <script src="../static/Dependencies/jquery/jquery.min.js"></script>
+    <script src="../static/Dependencies/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../static/Dependencies/raphael/raphael.min.js"></script>
+    <script src="../static/Dependencies/morrisjs/morris.min.js"></script>
+    <script src="../static/data/t_data.js"></script>
+	
+	<!-- Including KnobKnob and our main script file -->
+	<script src="../static/dial/transform.js"></script>
+	<script src="../static/dial/knobKnob.jquery.js"></script>
+	<script src="../static/dial/slider-knob.js"></script>
+	<!-- calls for the alerts panel -->
+	 <script>
+                function autoRefresh_div() {
+                        $("#alerts_readings").load("/roomreadings");
+                }
+                setInterval(autoRefresh_div, 100);
+                autoRefresh_div();
+     </script>
+ </body>
+ </html>

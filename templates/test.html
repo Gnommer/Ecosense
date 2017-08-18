@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HVAC CONTROL</title>
+	<style>
+  .GaugeMeter{
+    Position:        Relative;
+    Text-Align:      Center;
+    Overflow:        null;
+    Cursor:          Default;
+  }
+
+  .GaugeMeter SPAN,
+  .GaugeMeter B{
+    Margin:          0 23%;
+    Width:           5%;
+    Position:        absolute;
+    Text-align:      Center;
+    Display:         Inline-Block;
+    Color:           RGBa(0,0,0,.8);
+    Font-Weight:     100;
+    Font-Family:     "Open Sans", Arial;
+    Overflow:        null;
+    White-Space:     NoWrap;
+    Text-Overflow:   Ellipsis;
+  }
+  .GaugeMeter[data-style="Semi"] B{
+    Margin:          0 10%;
+    Width:           80%;
+  }
+
+  .GaugeMeter S,
+  .GaugeMeter U{
+    Text-Decoration: None;
+    Font-Size:       .49em;
+    Opacity:         .5;
+  }
+
+  .GaugeMeter B{
+    Color:           Black;
+    Font-Weight:     300;
+    Opacity:         .8;
+  }
+</style>
+	
+</head>
+
+<body>
+<div class="Preview">
+<div class="GaugeMeter" id="PreviewGaugeMeter_4" data-percent="100" data-append="F" data-size="180" data-theme="Black" data-width="15" data-stripe="2"></div>
+</div>
+    <script src="../static/Dependencies/jquery/jquery.min.js"></script>
+	<script src="../static/Dependencies/jquery.AshAlom.gaugeMeter-2.0.0.min.js"></script> 
+	<script>
+	$(".GaugeMeter").gaugeMeter();
+	</script>
+
+</body>

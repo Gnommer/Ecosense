@@ -1,0 +1,82 @@
+$(function(){
+	
+	var slider = $('#slider'),
+		min = slider.attr('min'),
+		max = slider.attr('max'),
+		currentValue = $('#currentValue');
+	
+	// Hiding the slider:
+	slider.hide();
+	
+	var colors = [
+		'26e000','2fe300','37e700','45ea00','51ef00',
+		'61f800','6bfb00','77ff02','80ff05','8cff09',
+		'93ff0b','9eff09','a9ff07','c2ff03','d7ff07',
+		'f2ff0a','fff30a','ffdc09','ffce0a','ffc30a',
+		'ffb509','ffa808','ff9908','ff8607','ff7005',
+		'ff5f04','ff4f03','f83a00','ee2b00','e52000'
+	];
+	
+	var rad2deg = 180/Math.PI;
+	var deg = 0;
+	var bars = $('#bars');
+	
+	for(var i=0;i<colors.length;i++){
+		
+		deg = i*12;
+		
+		// Create the colorbars
+		
+		$('<div class="colorBar">').css({
+			backgroundColor: '#'+colors[i],
+			transform:'rotate('+deg+'deg)',
+			top: -Math.sin(deg/rad2deg)*80+100,
+			left: Math.cos((180 - deg)/rad2deg)*80+100,
+		}).appendTo(bars);
+	}
+	
+	var colorBars = bars.find('.colorBar');
+	var numBars = 0, lastNum = -1;
+	
+	var pre = slider.val();
+	$('#control').on('mouseup.rem  touchend.rem', function(){
+		if(pre != slider.val()){		
+		    data = { 
+					'temp_setting': slider.val()
+				   }; 
+				url = "/dialchanged";
+				document.getElementById("ac_temperature").innerHTML = "Loading..";
+				$.post(url, data, function(result){
+					document.getElementById("ac_temperature").innerHTML = result["user_setting"];
+				});
+        }
+		
+		pre = slider.val();
+		});
+	
+	$('#control').knobKnob({
+		snap : 10,
+		value: 250,
+		turn : function(ratio){
+			// Changing the value of the hidden slider
+			slider.val(Math.round(ratio*(max-min) + min));
+			
+			// Updating the current value text
+			currentValue.html(slider.val());
+				
+			numBars = Math.round(colorBars.length*ratio);
+			
+			// Update the dom only when the number of active bars
+			// changes, instead of on every move
+			
+			if(numBars == lastNum){
+				return false;
+			}
+			lastNum = numBars;
+			colorBars.removeClass('active').slice(0, numBars).addClass('active');
+			
+		}
+		
+	});
+	
+});
