@@ -113,7 +113,7 @@ def configuration_for_pi():
 		'user_setting': analyse_object.predicted
 	       }
 	
-	requests.post('http://192.168.43.202:9002/setslavesetting', json = jdata)
+	requests.post('PI_IP_ADDRESS/setslavesetting', json = jdata)
 	return jsonify(jdata)
 
 @app.route('/prediction', methods=['GET','POST'])
@@ -153,7 +153,7 @@ def morissis():
 
 @app.route('/getsetting', methods=['POST','GET'])
 def pi_temp_get():
-        uresponse = requests.get("http://192.168.43.202:9002/getslavesetting")
+        uresponse = requests.get("PI_IP_ADDRESS/getslavesetting")
         data =uresponse.json()
         analyse_object.inner = data["inner"]
         analyse_object.humidity = data["humidity"]
